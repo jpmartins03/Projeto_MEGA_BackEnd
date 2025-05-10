@@ -6,11 +6,19 @@ module.exports = {
     getAll,
 };
 
-// // Lógica de banco de dados
+// controller/TaskController.js
 const pool = require('../database/db');
 
-async function listarTarefas() {
-  const result = await pool.query('SELECT * FROM tarefas');
-  return result.rows;
-}
-module.exports = { listarTarefas };
+const getTasks = (req, res) => {
+  // Sua lógica para buscar as tarefas
+  pool.query('SELECT * FROM tarefas', (err, result) => {
+    if (err) {
+      return res.status(500).json({ message: 'Erro no banco de dados' });
+    }
+    res.status(200).json(result.rows);
+  });
+};
+
+module.exports = {
+  getTasks,
+};

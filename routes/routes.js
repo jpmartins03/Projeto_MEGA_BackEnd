@@ -3,19 +3,7 @@ const TaskController = require("../controller/TaskController")
 
 routes.get("/", TaskController.getAll)
 
-module.exports = routes
-
-
-// Rota para listar todas as tarefas
-router.get('/tarefas', TaskController.listarTarefas);
-
-// // Rota para criar uma nova tarefa
-// router.post('/tarefas', TaskController.criarTarefa);
-
-// // Rota para marcar uma tarefa como feita
-// router.put('/tarefas/:id', TaskController.atualizarTarefa);
-
-// // Rota para deletar uma tarefa
-// router.delete('/tarefas/:id', TaskController.deletarTarefa);
+// Definindo a rota
+router.get('/tasks', TaskController.getTasks); // Verifique se está chamando a função correta
 
 module.exports = router;
