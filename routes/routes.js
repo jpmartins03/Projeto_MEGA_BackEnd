@@ -1,9 +1,11 @@
-const routes = require("express").Router();
-const TaskController = require("../controller/TaskController")
+const express = require('express');
+const router = express.Router();
+const TaskController = require('../controller/TaskController');  // Certifique-se de importar corretamente
 
-routes.get("/", TaskController.getAll)
 
-// Definindo a rota
-router.get('/tasks', TaskController.getTasks); // Verifique se está chamando a função correta
+
+// Verifique se a função está sendo importada corretamente
+router.get('/tasks', TaskController.getTasks); // A função getTasks precisa ser uma função válida
+router.post('/tasks', TaskController.createTask); // Certifique-se de ter uma função 'createTask' no TaskController
 
 module.exports = router;

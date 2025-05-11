@@ -1,19 +1,20 @@
 const { Pool } = require('pg');
-require('dotenv').config();
+// require('dotenv').config(); // Carregar variáveis do arquivo .env
 
 const pool = new Pool({
-  user: process.env.DB_USER, // seu usuário do PostgreSQL
-  host: process.env.DB_HOST, // geralmente 'localhost'
-  database: process.env.DB_NAME, // nome do banco de dados
-  password: process.env.DB_PASSWORD, // sua senha do PostgreSQL
-  port: process.env.DB_PORT || 5432, // porta padrão do PostgreSQL
+ user: 'postgres',                 
+  host: 'localhost',               
+  database: 'controle_tarefas',   
+  password: 'facom',               
+  port: 5432,             
 });
 
-pool.connect()
-  .then(() => {
-    console.log('✅ Conectado ao PostgreSQL com sucesso!');
-  })
-  .catch(err => {
-    console.error('❌ Erro ao conectar ao PostgreSQL:', err);
-  });
+pool.connect((err) => {
+  if (err) {
+    console.error('Erro ao conectar ao banco de dados', err);
+  } else {
+    console.log('Conexão bem-sucedida com o banco de dados');
+  }
+});
+
 module.exports = pool;

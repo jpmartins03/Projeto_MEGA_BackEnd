@@ -1,63 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = 'stylesheet' href= "Style.css">
-    <title>To Do List</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adicionar Tarefa</title>
 </head>
 <body>
-    <h1>Hello World</h1>
+  <h1>Adicionar Tarefa</h1>
 
-    <script src = "Script.js"></script>
-</body>
+  <form id="form-tarefa">
+    <input type="text" id="task_name" placeholder="Nome da tarefa" required />
+    <button type="submit">Adicionar</button>
+  </form>
 
+  <p id="mensagem"></p>
 
-</html>
-<!-- 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar Tarefa</title>
-</head>
-<body>
-    <h1>Adicionar Tarefa</h1>
+  <script>
+    const form = document.getElementById('form-tarefa');
+    const mensagem = document.getElementById('mensagem');
 
-    <form id="form-tarefa">
-        <input type="text" id="nome" placeholder="Nome da tarefa" required />
-        <textarea id="descricao" placeholder="Descrição da tarefa" required></textarea>
-        <button type="submit">Adicionar</button>
-    </form>
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();  // Evita recarregar a página
 
-    <script>
-        const form = document.getElementById('form-tarefa');
+      const task_name = document.getElementById('task_name').value;
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();  // Evita o envio tradicional do formulário
-
-            const nome = document.getElementById('nome').value;
-            const descricao = document.getElementById('descricao').value;
-
-            const novaTarefa = { nome, descricao };
-
-            try {
-                // Envia a requisição para o back-end
-                const response = await fetch('http://localhost:3000/tarefas', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(novaTarefa),
-                });
-
-                const data = await response.json();
-                console.log('Tarefa criada:', data);
-            } catch (error) {
-                console.error('Erro ao criar tarefa:', error);
-            }
+      try {
+        const response = await fetch('http://localhost:3000/tarefas', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ task_name }),
         });
-    </script>
+
+        const data = await response.json();
+
+        if (response.ok) {
+          mensagem.textContent = `Tarefa adicionada: ${data.task_name}`;
+          form.reset();
+        } else {
+          mensagem.textContent = `Erro: ${data.message}`;
+        }
+      } catch (error) {
+        mensagem.textContent = 'Erro ao conectar com o servidor';
+      }
+    });
+  </script>
 </body>
-</html> --> -->
+</html>
