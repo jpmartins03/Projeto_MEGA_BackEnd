@@ -1,33 +1,26 @@
 const express = require('express');
 const path = require('path');
-const routes = require('./routes/routes');
 
+const taskRoutes = require('./routes/taskRou');
+const viewRoutes = require('./routes/viewRoutes');
 
 const app = express();
 const port = 3000;
 
-// Configura EJS como engine
+// Configurar EJS
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
-// Para servir arquivos estáticos como CSS e JS
-app.use(express.static(path.join(__dirname, "public")));
-app.use(routes);
+// Middleware para arquivos estáticos (CSS, JS)
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.get("/", (req, res) => {
-    res.render('index');
-});
+// Middleware para interpretar JSON no corpo das requisições
+app.use(express.json());
+
+// Rotas
+app.use('/', viewRoutes);
+app.use('/', taskRoutes);
 
 app.listen(port, () => {
-    console.log(`Servidor rodando em http://localhost:${port}`)
+  console.log(`Servidor rodando em http://localhost:${port}`);
 });
-
-// const express = require('express');
-// const app = express();
-// const routes = require('./routes/routes'); // Importando as rotas
-
-// app.use(express.json()); // Para ler o corpo da requisição em JSON
-// app.use('/api', routes); // Definindo a rota base para as rotas
-
-// app.listen(3000, () => {
-//   console.log('Servidor rodando na porta 3000');
-// });

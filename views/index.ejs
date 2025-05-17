@@ -1,64 +1,48 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = 'stylesheet' href= "Style.css">
-    <title>To Do List</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To Do List</title>
 </head>
 <body>
-    <h1>Hello World</h1>
+  <h1>Adicionar Tarefa</h1>
 
-    <script src = "Script.js"></script>
-</body>
+  <!-- Formulário para adicionar tarefa -->
+  <form id="form-tarefa">
+    <input type="text" id="task_name" placeholder="Nome da tarefa" required />
+    <button type="submit">Adicionar</button>
+  </form>
 
+  <script>
+    const form = document.getElementById('form-tarefa');
 
-</html>
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar Tarefa</title>
-</head>
-<body>
-    <h1>Adicionar Tarefa</h1>
+      const task_name = document.getElementById('task_name').value;
 
-    <form id="form-tarefa">
-        <input type="text" id="nome" placeholder="Nome da tarefa" required />
-        <textarea id="descricao" placeholder="Descrição da tarefa" required></textarea>
-        <button type="submit">Adicionar</button>
-    </form>
-
-    <script>
-        const form = document.getElementById('form-tarefa');
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();  // Evita o envio tradicional do formulário
-
-            const nome = document.getElementById('nome').value;
-            const descricao = document.getElementById('descricao').value;
-
-            const novaTarefa = { nome, descricao };
-
-            try {
-                // Envia a requisição para o back-end
-                const response = await fetch('http://localhost:3000/tarefas', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(novaTarefa),
-                });
-
-                const data = await response.json();
-                console.log('Tarefa criada:', data);
-            } catch (error) {
-                console.error('Erro ao criar tarefa:', error);
-            }
+      try {
+        const response = await fetch('/tasks', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ task_name })
         });
-    </script>
-</body>
-</html> 
 
+        const data = await response.json();
+        console.log('Tarefa criada:', data);
+
+        // Limpa o campo e atualiza a página, se quiser
+        form.reset();
+        alert('Tarefa adicionada com sucesso!');
+        // location.reload(); // opcional: recarrega a página
+      } catch (error) {
+        console.error('Erro ao adicionar tarefa:', error);
+        alert('Erro ao adicionar tarefa.');
+      }
+    });
+  </script>
+</body>
+</html>

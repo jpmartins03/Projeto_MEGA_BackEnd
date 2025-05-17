@@ -1,19 +1,20 @@
 const { Pool } = require('pg');
-// require('dotenv').config(); // Carregar variáveis do arquivo .env
 
 const pool = new Pool({
- user: 'postgres',                 
-  host: 'localhost',               
-  database: 'controle_tarefas',   
-  password: 'facom',               
-  port: 5432,             
+  user: 'postgres',                 // Seu usuário do PostgreSQL
+  host: 'localhost',               // Host do banco
+  database: 'controle_tarefas',    // Nome do banco de dados
+  password: 'facom',               // Senha do seu usuário
+  port: 5432,                      // Porta padrão do PostgreSQL
 });
 
-pool.connect((err) => {
+// Verificar conexão
+pool.connect((err, client, release) => {
   if (err) {
     console.error('Erro ao conectar ao banco de dados', err);
   } else {
     console.log('Conexão bem-sucedida com o banco de dados');
+    release(); // libera o cliente
   }
 });
 
