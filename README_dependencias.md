@@ -1,4 +1,3 @@
-
 # 📝 To Do List - Projeto Web com Node.js, Express e PostgreSQL
 
 Este é um projeto de **Lista de Tarefas (To-do List)** feito com:
@@ -7,8 +6,6 @@ Este é um projeto de **Lista de Tarefas (To-do List)** feito com:
 - ⚙️ Node.js + Express (back-end)
 - 🗄️ PostgreSQL (banco de dados relacional)
 - 🖼️ EJS (para renderizar o HTML do servidor)
-
-O objetivo é permitir que os usuários **adicionem, visualizem e removam tarefas** de forma dinâmica, com interação 100% via navegador.
 
 ---
 
@@ -20,6 +17,7 @@ O objetivo é permitir que os usuários **adicionem, visualizem e removam tarefa
 - 🔄 Interface se atualiza automaticamente após cada ação
 
 ---
+
 
 ## 🗂 Estrutura do projeto
 
@@ -42,9 +40,6 @@ Projeto/
 ├── package.json
 └── README.md
 ```
-
----
-
 ## ⚙️ Tecnologias utilizadas
 
 - Node.js
@@ -201,8 +196,3 @@ npx nodemon index.js
 - [ ] Deploy online (Render, Railway, etc.)
 
 ---
-
-## 👩‍💻 Desenvolvido por
-
-**Helen Yukari**  
-📚 Estudante de Engenharia de Computação na UFMS  
