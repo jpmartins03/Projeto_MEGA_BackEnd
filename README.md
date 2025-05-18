@@ -67,8 +67,78 @@ cd To-do-list-Projeto-Backend
 
 ### 2. Instale as dependências
 
+# 📦 Dependências e Ferramentas Utilizadas
+
+Este documento lista tudo o que foi instalado para rodar o projeto **To-do List com Node.js, Express, EJS e PostgreSQL**.
+
+---
+
+## ✅ 🛠 Ferramentas instaladas no sistema
+
+| Ferramenta         | Função principal                                 | Instalação                        |
+|--------------------|--------------------------------------------------|-----------------------------------|
+| **Node.js**        | Interpretador JavaScript no back-end             | [nodejs.org](https://nodejs.org) |
+| **npm** (vem com Node.js) | Gerenciador de pacotes do Node            | Já vem com o Node.js             |
+| **PostgreSQL**     | Banco de dados relacional                        | [postgresql.org](https://www.postgresql.org/download/) |
+| **DBeaver** *(opcional)* | Cliente gráfico para acessar o banco       | [dbeaver.io](https://dbeaver.io) |
+
+---
+
+## ✅ 📦 Pacotes npm instalados no projeto
+
 ```bash
-npm install
+npm install express pg ejs
+```
+
+| Pacote             | Função                                                  |
+|--------------------|----------------------------------------------------------|
+| `express`          | Framework web para criar rotas, servidor e middleware    |
+| `pg`               | Cliente PostgreSQL para conectar ao banco                |
+| `ejs`              | Template engine para renderizar HTML no servidor         |
+
+---
+
+## ✅ 📦 Pacotes para desenvolvimento
+
+```bash
+npm install --save-dev nodemon
+```
+
+| Pacote             | Função                                                  |
+|--------------------|----------------------------------------------------------|
+| `nodemon`          | Reinicia automaticamente o servidor ao salvar arquivos   |
+
+---
+
+## ✅ `package.json` esperado
+
+```json
+"dependencies": {
+  "express": "^4.18.2",
+  "pg": "^8.10.0",
+  "ejs": "^3.1.8"
+},
+"devDependencies": {
+  "nodemon": "^3.1.0"
+}
+```
+
+---
+
+## 🧠 Observações
+
+- O projeto pode ser executado com `npx nodemon index.js`
+- O banco de dados deve estar rodando e acessível localmente na porta padrão (5432)
+- Não se esqueça de criar a tabela `tasks` com a estrutura correta antes de iniciar
+-Obs: em bd.js as informações de conexão com o banco deve ser alterada com as informações do seu servidor:
+```
+const pool = new Pool({
+  user: 'nome',                 // Seu usuário do PostgreSQL
+  host: 'localhost',               // Host do banco
+  database: 'nome_do banco',    // Nome do banco de dados
+  password: 'sua_senha',               // Senha do seu usuário
+  port: 5432,                      // Porta padrão do PostgreSQL
+});
 ```
 
 ### 3. Configure o banco de dados
